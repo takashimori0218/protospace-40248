@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_14_033120) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_19_114117) do
+  create_table "catch_copies", charset: "utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "prototype_id", null: false
+    t.index ["prototype_id"], name: "index_catch_copies_on_prototype_id"
+  end
+
+  create_table "concepts", charset: "utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "prototype_id", null: false
+    t.index ["prototype_id"], name: "index_concepts_on_prototype_id"
+  end
+
+  create_table "prototypes", charset: "utf8", force: :cascade do |t|
+    t.string "title", default: "", null: false
+    t.text "catch_copy", null: false
+    t.text "concept", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_prototypes_on_user_id"
+  end
+
+  create_table "titles", charset: "utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -27,4 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_14_033120) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "catch_copies", "prototypes"
+  add_foreign_key "concepts", "prototypes"
+  add_foreign_key "prototypes", "users"
 end
