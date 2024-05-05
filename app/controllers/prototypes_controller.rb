@@ -23,7 +23,7 @@ class PrototypesController < ApplicationController
     @prototype = Prototype.find(params[:id])
     @comment   = Comment.new
     @comments   = @prototype.comments
-    @user = User.find(params[:id]) if user_signed_in?
+    @user = User.find(params[:id])
   end
   
   def edit
