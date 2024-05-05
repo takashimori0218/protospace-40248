@@ -5,7 +5,7 @@ class CreatePrototypes < ActiveRecord::Migration[7.0]
       t.text       :catch_copy, null: false 
       t.text       :concept, null: false 
       t.references :user, null: false, foreign_key: true
-      t.text       :content, null: false, foreign_key: true
+      t.text       :content, null: false
 
       t.timestamps
     end

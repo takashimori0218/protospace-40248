@@ -39,26 +39,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_30_123758) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "catch_copies", charset: "utf8", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "prototype_id", null: false
-    t.index ["prototype_id"], name: "index_catch_copies_on_prototype_id"
-  end
-
   create_table "comments", charset: "utf8", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "prototype_id"
-    t.text "content"
-  end
-
-  create_table "concepts", charset: "utf8", force: :cascade do |t|
+    t.text "content_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "prototype_id", null: false
-    t.index ["prototype_id"], name: "index_concepts_on_prototype_id"
   end
 
   create_table "prototypes", charset: "utf8", force: :cascade do |t|
@@ -66,14 +52,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_30_123758) do
     t.text "catch_copy", null: false
     t.text "concept", null: false
     t.bigint "user_id", null: false
+    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_prototypes_on_user_id"
-  end
-
-  create_table "titles", charset: "utf8", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
@@ -94,7 +76,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_30_123758) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "catch_copies", "prototypes"
-  add_foreign_key "concepts", "prototypes"
   add_foreign_key "prototypes", "users"
 end
