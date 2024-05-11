@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_30_123758) do
   create_table "comments", charset: "utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "prototype_id"
-    t.text "content_id"
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -52,7 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_30_123758) do
     t.text "catch_copy", null: false
     t.text "concept", null: false
     t.bigint "user_id", null: false
-    t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_prototypes_on_user_id"

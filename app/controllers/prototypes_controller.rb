@@ -23,7 +23,6 @@ class PrototypesController < ApplicationController
     @prototype = Prototype.find(params[:id])
     @comment   = Comment.new
     @comments   = @prototype.comments
-    @user = User.find(params[:id])
   end
   
   def edit
@@ -51,7 +50,7 @@ class PrototypesController < ApplicationController
 
   private
   def prototype_params
-    params.require(:prototype).permit(:title, :catch_copy, :concept, :image, ).merge(user_id: current_user.id)
+    params.require(:prototype).permit(:title, :catch_copy, :concept, :user, :image).merge(user_id: current_user.id)
   end
 
   def set_prototype
